@@ -3,7 +3,7 @@ import { Navbar } from "../navbar/navbar";
 
 @Component({
   selector: 'app-home-page',
-  imports: [Navbar],
+  imports: [],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })
