@@ -1,5 +1,20 @@
 .carousel-section{
-    border: 1px solid blue;
+  /* background-image:url('/assets/images/fotoTitolo.jpg'); */
+  
+  background-position:center;
+  background-size:cover;
     height: 600px;
- /* background-color: trasparent; */
+}
+
+
+.mainTitle {
+   font-family: "Fascinate", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+.titleSecondary {
+    font-family: "Elms Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
 }
