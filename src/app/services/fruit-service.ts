@@ -9,29 +9,23 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class FruitService {
   private http = inject(HttpClient);
-  private baseUrl : string = '/api/fruit/all'
+  private baseUrl : string = 'https://www.fruityvice.com/api/fruit/all'
 
   
   fruits$ = new BehaviorSubject<FruitsModel[]> ([])
   
-  // api url per prendere tutti i frutti /api/fruit/all
+
 
 
   // chiamata per prendere tutti i frutti
 
-  // getAllFruits(){
-  //  return  this.http.get(this.baseUrl).subscribe({
-  //     next: (response: any) =>{
-  //       // this.fruits$ = response.body;
-  //       this.fruits$.next(response)
-  //       console.log('Dati dalla chiamata api',response)
-  //     },
-  //     error: (err: any) => console.error('Errore nella chiamata', err)
-  //   })
-  // }
-
   getAllFruits(){
-    return this.http.get(this.baseUrl)
+   return this.http.get(this.baseUrl).subscribe({
+      next: (response: any) =>{
+        this.fruits$.next(response);
+        console.log('Dati dalla chiamata api',response)
+      },
+       error: (err: any) => console.error('Errore nella chiamata', err)
+    })
   }
-  // todo: da rivedere 
 }

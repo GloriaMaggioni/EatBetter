@@ -17,13 +17,12 @@ export class HomePage implements OnInit {
   fruits : FruitsModel[] = []
   
   ngOnInit(): void {
-    this.fruitService.getAllFruits().subscribe({
-      next: (response: any) =>{
-        this.fruits = response
-        console.log(response)
-      }
+    this.fruitService.getAllFruits()
+    this.fruitService.fruits$.subscribe((data) =>{
+        this.fruits = data;
+        this.cdr.detectChanges()
+      
     })
-    this.cdr.detectChanges()
   }
   
 }

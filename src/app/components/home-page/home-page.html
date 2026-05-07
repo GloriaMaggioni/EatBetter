@@ -5,10 +5,10 @@
 <section class="homePage  w-full h-full   ">
     <app-hero-section></app-hero-section>
 
-    <div class="fruit-container w-full h-40 border border-blue-700 ">CONTENITORE DI TUTTA LA FRUTTA
+    <div class="fruit-container w-full h-fit  border-2 border-blue-700 ">CONTENITORE DI TUTTA LA FRUTTA
 
   @for(fruit of fruits; track $index){
-     <div class="fruit-card border border-amber-500">
+     <div class="fruit-card h-full border border-amber-500">
             <h2>Nome frutto: {{fruit.name}}</h2>
             <p>Famiglia: {{fruit.family}}</p>
         </div>
