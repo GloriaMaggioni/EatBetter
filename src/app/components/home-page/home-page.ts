@@ -18,6 +18,7 @@ export class HomePage implements OnInit {
 
   isClicked = signal(false)
   el: any = null;
+  yourFruit: any
   
   ngOnInit(): void {
     this.fruitService.getAllFruits()
@@ -25,6 +26,11 @@ export class HomePage implements OnInit {
         this.fruits = data;
         this.cdr.detectChanges()
       
+    })
+
+    this.fruitService.filteredFruit.subscribe( fruit =>{
+      this.yourFruit = fruit;
+      this.cdr.detectChanges()
     })
   }
 
@@ -37,6 +43,8 @@ export class HomePage implements OnInit {
     this.isClicked.update(close => !close);
     this.el = null
   }
+
+
 
 
   
