@@ -32,7 +32,6 @@ export class HomePage implements OnInit {
    this.fruitService.filteredFruit.subscribe( fruit =>{
       this.yourFruit = fruit;
       this.cdr.detectChanges()
-      console.log(this.yourFruit)
     })
 
   }
