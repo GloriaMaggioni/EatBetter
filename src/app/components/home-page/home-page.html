@@ -23,7 +23,13 @@
                   <p> <i class="font-semibold"> Zuccheri:</i> {{yourFruit.nutritions?.sugar}}</p>
                 </div> 
               </div>
-            }@else {
+            }@else if(categoryFruitSelected){
+                <div class="border border-red-800 w-[80%]">CATEGORIA FRUTTA SELEZIONATA
+                    <h1>{{categoryFruitSelected.name}}</h1>
+                </div>
+
+            }
+            @else {
              <div class="fruitsCard-container relative w-[80%] m-auto mt-8 flex items-center align-middle justify-evenly flex-wrap ">
 
                @for(fruit of fruits; track $index){

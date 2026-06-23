@@ -17,13 +17,12 @@
 
 
 <div class="navBar-categories w-fit mr-3 p-1 inline-flex ">
-        <p class="p-1 mr-2 rounded-md hover:cursor-pointer hover:bg-green-800 hover:text-white">All</p>
-    <p class="p-1 mr-2 rounded-md hover:cursor-pointer hover:bg-green-800 hover:text-white">Dolci</p>
-    <p class="p-1 mr-2 rounded-md hover:cursor-pointer  hover:bg-green-800 hover:text-white">Semiacidi</p>
-    <p class="p-1 mr-2 rounded-md hover:cursor-pointer  hover:bg-green-800 hover:text-white">Acidi</p>
-    <p class="p-1 mr-2 rounded-md hover:cursor-pointer  hover:bg-green-800 hover:text-white">Oleosi/Secca</p>
-    <p class="p-1 rounded-md hover:cursor-pointer  hover:bg-green-800 hover:text-white">Meloni</p>
-
+        <button class="p-1 mr-2 rounded-md hover:cursor-pointer hover:bg-green-800 hover:text-white" (click)="searchFruit()">All</button>
+        <button class="p-1 mr-2 rounded-md hover:cursor-pointer hover:bg-green-800 hover:text-white " (click)="findFruit('Sweet')">Dolci</button>
+         <button class="p-1 mr-2 rounded-md hover:cursor-pointer  hover:bg-green-800 hover:text-white" (click)="findFruit('Semi-Acid')">Semi-Acidi</button>
+         <button class="p-1 mr-2 rounded-md hover:cursor-pointer  hover:bg-green-800 hover:text-white" (click)="findFruit('Acid')">Acidi</button>
+         <button class="p-1 mr-2 rounded-md hover:cursor-pointer  hover:bg-green-800 hover:text-white" (click)="findFruit('Oleaginous/Dry')">Oleosi/Secca</button>
+         <button class="p-1 rounded-md hover:cursor-pointer  hover:bg-green-800 hover:text-white" (click)="findFruit('Melon')">Meloni</button>
 </div>
 
 

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { FruitsModel } from '../models/fruits-model';
+import {FRUITS_ACID, FRUITS_MELONS, FRUITS_OLEAGINOUS_DRY, FRUITS_SEMIACID, FRUITS_SWEET} from '../models/classificationFruits'
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,12 +10,15 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class FruitService {
   private http = inject(HttpClient);
-  private baseUrl : string = '/api/fruit/all'
+  private baseUrl : string = '/api/fruit/all';
+  private listsFruit = [FRUITS_SWEET, FRUITS_ACID, FRUITS_SEMIACID, FRUITS_MELONS, FRUITS_OLEAGINOUS_DRY]
 
 
   
   fruits$ = new BehaviorSubject<FruitsModel[]> ([]);
   filteredFruit = new BehaviorSubject<FruitsModel[] | null>(null)
+  selectedCategory = new BehaviorSubject<string[]>([''])
+  
   
 
 
@@ -44,7 +48,39 @@ export class FruitService {
     }
 
 
- 
+  //metodo per prendere le liste dei frutti filtrati
+  categoryFruit(category: string){
+    let categoryList : string[] = [''];
+
+
+    if(category === 'Sweet'){
+      categoryList = this.listsFruit[0];
+       console.log('Frutto dolce', categoryList)
+    } else if(category === 'Acid'){
+      categoryList = this.listsFruit[1];
+             console.log('Frutto acido', categoryList)
+    } else if(category === 'Semi-Acid'){
+      categoryList = this.listsFruit[2];
+             console.log('Frutto semi-acido', categoryList)
+    } else if(category === 'Melon'){
+      categoryList = this.listsFruit[3];
+             console.log('Frutto melone', categoryList)
+    } else if(category === 'Oleaginous/Dry'){
+      categoryList = this.listsFruit[4];
+        console.log('Frutto oleoso/secco', categoryList)
+    } else {
+      alert('Frutto non trovato!')
+       console.log('Frutto non trovato')
+    }
+
+    this.selectedCategory.next(categoryList); 
+
+
+    this.fruits$.getValue().filter((frutto: any) =>{
+       categoryList.includes(frutto.name)
+          // console.log('fruitto name:',frutto)
+    })
+  }
 
 
 

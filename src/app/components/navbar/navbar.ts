@@ -13,10 +13,12 @@ export class Navbar {
   private service = inject(FruitService);
 
  testoDigitato: string = '';
+ categories = ['Sweet', 'Acid', 'Semi-Acid', 'Melon', 'Oleaginous/Dry',]
 
   //method to take the searchBar text
   searchFruit(){
    this.service.getAllFruits()
+  //  console.log('searchfruit data', this.searchFruit())
   }
 
 
@@ -30,5 +32,8 @@ export class Navbar {
     }
   }
 
-
+  findFruit(category : string){
+    this.service.categoryFruit(category)
+    console.log('categoria dal metodo findFruit:', category)
+  }
 }
