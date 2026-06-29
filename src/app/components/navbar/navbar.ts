@@ -13,7 +13,7 @@ export class Navbar {
   private service = inject(FruitService);
 
  testoDigitato: string = '';
- categories = ['Sweet', 'Acid', 'Semi-Acid', 'Melon', 'Oleaginous/Dry',]
+ categories = ['All', 'Sweet', 'Acid', 'Semi-Acid', 'Melon', 'Oleaginous/Dry',]
 
   //method to take the searchBar text
   searchFruit(){

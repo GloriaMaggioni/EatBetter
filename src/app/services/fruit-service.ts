@@ -4,6 +4,7 @@ import { FruitsModel } from '../models/fruits-model';
 import {FRUITS_ACID, FRUITS_MELONS, FRUITS_OLEAGINOUS_DRY, FRUITS_SEMIACID, FRUITS_SWEET} from '../models/classificationFruits'
 
 import { BehaviorSubject } from 'rxjs';
+import { response } from 'express';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,7 @@ export class FruitService {
    return this.http.get(this.baseUrl, ).subscribe({
       next: (response: any) =>{
         this.fruits$.next(response);
-         console.log('Dati dalla chiamata api',response)
+          console.log('Dati dalla chiamata api',response)
       },
        error: (err: any) => console.error('Errore nella chiamata', err)
     })
@@ -68,18 +69,23 @@ export class FruitService {
     } else if(category === 'Oleaginous/Dry'){
       categoryList = this.listsFruit[4];
         console.log('Frutto oleoso/secco', categoryList)
-    } else {
-      alert('Frutto non trovato!')
+    }else if(category === 'All'){       // ! FORSE CE UN PROBLEMA: RICEVO I DATI DALLA API CALL TWO TIMES
+      this.getAllFruits();
+      this.filteredFruit.next(this.fruits$.getValue())
+      console.log('Risposta da all:', this.getAllFruits())
+   } else {
        console.log('Frutto non trovato')
     }
 
     this.selectedCategory.next(categoryList); 
 
 
-    this.fruits$.getValue().filter((frutto: any) =>{
-       categoryList.includes(frutto.name)
-          // console.log('fruitto name:',frutto)
+    let resultCategoryFruits = this.fruits$.getValue().filter((frutto: any) =>{
+        return categoryList.includes(frutto.name)
     })
+
+    this.filteredFruit.next(resultCategoryFruits);
+    console.log('Dati da resultFilteredFruits:' , this.filteredFruit)
   }
 
 

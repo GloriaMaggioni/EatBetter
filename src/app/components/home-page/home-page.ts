@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
   isClicked = signal(false)
   el: any = null;
  @Input() yourFruit: any
- @Input() categoryFruitSelected : any;
+ categoryFruitSelected : any = this.fruitService.filteredFruit;
   
   ngOnInit(): void {
     this.fruitService.getAllFruits()
@@ -35,8 +35,12 @@ export class HomePage implements OnInit {
       this.cdr.detectChanges()
     })
 
-    this.fruitService.categoryFruit(this.categoryFruitSelected)
-    console.log(this.categoryFruitSelected)
+    this.fruitService.filteredFruit.subscribe(result =>{
+      this.categoryFruitSelected = result;
+      this.cdr.detectChanges()
+          console.log(this.categoryFruitSelected)
+
+    })
 
   }
   
