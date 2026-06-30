@@ -17,8 +17,9 @@ export class FruitService {
 
   
   fruits$ = new BehaviorSubject<FruitsModel[]> ([]);
-  filteredFruit = new BehaviorSubject<FruitsModel[] | null>(null)
-  selectedCategory = new BehaviorSubject<string[]>([''])
+  filteredFruit = new BehaviorSubject<FruitsModel | null>(null);
+  selectedCategory = new BehaviorSubject<string[]>(['']);
+  filteredfruitByCategory= new  BehaviorSubject<FruitsModel[] | null>(null);
   
   
 
@@ -71,7 +72,7 @@ export class FruitService {
         console.log('Frutto oleoso/secco', categoryList)
     }else if(category === 'All'){       // ! FORSE CE UN PROBLEMA: RICEVO I DATI DALLA API CALL TWO TIMES
       this.getAllFruits();
-      this.filteredFruit.next(this.fruits$.getValue())
+      this.filteredfruitByCategory.next(this.fruits$.getValue())
       console.log('Risposta da all:', this.getAllFruits())
    } else {
        console.log('Frutto non trovato')
@@ -84,7 +85,7 @@ export class FruitService {
         return categoryList.includes(frutto.name)
     })
 
-    this.filteredFruit.next(resultCategoryFruits);
+    this.filteredfruitByCategory.next(resultCategoryFruits);
     console.log('Dati da resultFilteredFruits:' , this.filteredFruit)
   }
 
