@@ -103,14 +103,45 @@ describe('FruitService', () => {
 
 
 
-  it('should return a catogry of fruit', ()=>{
+  describe('categoryFruit', ()=>{
 
+    const mockFruitsPerCategory = [
+      {name:'Banana', family: 'Sweet'},
+      {name:'Apple', family: 'Acid'},
+      {name:'Apricot', family: 'Semi-Acid'},
+      {name:'Watermelon', family: 'Melon'},
+      {name:'Hazelnut', family: 'Oleaginous/Dry'}
+
+    ];
+
+    it.each([
+  ['Sweet', [{ name: 'Banana', family: 'Sweet' }, { name: 'Fig', family: 'Sweet' }]],
+  ['Acid', [{ name: 'Apple', family: 'Acid' }, { name: 'Lemon', family: 'Acid' }]],
+  ['Semi-Acid', [{ name: 'Grape', family: 'Semi-Acid' }]],
+  ['Melon', [{ name: 'Melon', family: 'Melons' }]],
+])('should filter %s fruits correctly', (category, expected) => {
+  service.fruits$.next(mockFruitsPerCategory)
+
+  service.categoryFruit(category);
+
+  service.fruits$.subscribe( categoryFruit =>{
+    expect(categoryFruit).toEqual(mockFruitsPerCategory)
+  })
+
+})
+
+ it('should handle an error when you search a category of fruit', () => {
+    const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {});
+
+    service.categoryFruit('CategoriaCheNonEsiste');
+
+    expect(alertSpy).toHaveBeenCalledWith('Frutto non trovato');
+  });
+    
   });
 
 
-  it ('should handle an error when you searching a category of fruit', () =>{
 
-  })
 
 
 });
