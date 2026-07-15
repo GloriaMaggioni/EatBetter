@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Component, inject, Input, OnInit, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { Navbar } from "../navbar/navbar";
 import { HeroSection } from "../hero-section/hero-section";
 import { FruitService } from '../../services/fruit-service';
 import { FruitsModel } from '../../models/fruits-model';
 import { FormGroup, FormsModule } from '@angular/forms';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-home-page',
@@ -13,8 +14,9 @@ import { FormGroup, FormsModule } from '@angular/forms';
 })
 export class HomePage implements OnInit {
   
-  private fruitService = inject(FruitService)
-  private cdr = inject(ChangeDetectorRef)
+  private fruitService = inject(FruitService);
+  private cdr = inject(ChangeDetectorRef);
+  private platformId = inject(PLATFORM_ID)
   fruits : FruitsModel[] = []
 
   isClicked = signal(false)
@@ -26,6 +28,11 @@ export class HomePage implements OnInit {
 
   
   ngOnInit(): void {
+
+
+    if(isPlatformServer(this.platformId)){
+      return;
+    }
     this.fruitService.getAllFruits();
 
     // subscribe per prendere tutti i dati dei frutti
