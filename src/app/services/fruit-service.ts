@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class FruitService {
   private http = inject(HttpClient);
-  private baseUrl : string = 'https://corsproxy.io/?https://www.fruityvice.com/api/fruit/all';
+  private baseUrl : string = 'https://api.allorigins.win/raw?url=https://www.fruityvice.com/api/fruit/all';
   private listsFruit = [FRUITS_SWEET, FRUITS_ACID, FRUITS_SEMIACID, FRUITS_MELONS, FRUITS_OLEAGINOUS_DRY]
 
 
@@ -39,7 +39,7 @@ export class FruitService {
 
   // metodo per prendere il nome dei frutti
     getYourFruit(name: string){
-      this.http.get(`https://corsproxy.io/?https://www.fruityvice.com/api/fruit/${name}`).subscribe({
+      this.http.get(`https://api.allorigins.win/raw?url=https://www.fruityvice.com/api/fruit/${name}`).subscribe({
         next: (response: any) =>{
           this.filteredFruit.next(response);
         },
@@ -78,6 +78,7 @@ export class FruitService {
     })
 
     this.filteredFruitByCategory.next(resultCategoryFruits);
+    this.filteredFruit.next(null);
   }
 
 
