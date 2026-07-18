@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class FruitService {
   private http = inject(HttpClient);
-  private baseUrl : string = 'assets/fruits.json';
+  private baseUrl : string = '/api/fruit/all';
   private listsFruit = [FRUITS_SWEET, FRUITS_ACID, FRUITS_SEMIACID, FRUITS_MELONS, FRUITS_OLEAGINOUS_DRY]
 
 
@@ -30,6 +30,7 @@ export class FruitService {
    return this.http.get(this.baseUrl, ).subscribe({
       next: (response: any) =>{
         this.fruits$.next(response);
+        console.log(this.getAllFruits())
       },
        error: (err: any) => console.error('Errore nella chiamata', err)
     })
@@ -38,14 +39,12 @@ export class FruitService {
 
   // metodo per prendere il nome dei frutti
     getYourFruit(name: string){
-      const fruits = this.fruits$.getValue();
-      const fruit = fruits.find((f: any) => f.name.toLowerCase() === name.toLowerCase());
-      if (fruit) {
-        this.filteredFruit.next(fruit);
-      } else {
-        this.filteredFruit.next(null);
-        alert('Frutto non trovato');
-      }
+      this.http.get(`/api/fruit/${name}`).subscribe({
+        next: (response: any) =>{
+          this.filteredFruit.next(response);
+        },
+        error: (error: any) => console.error('errore nel filtraggio frutti:', error)
+      })
     }
 
 
@@ -79,7 +78,6 @@ export class FruitService {
     })
 
     this.filteredFruitByCategory.next(resultCategoryFruits);
-    this.filteredFruit.next(null);
   }
 
 
