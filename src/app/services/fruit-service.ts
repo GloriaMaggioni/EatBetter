@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { FruitsModel } from '../models/fruits-model';
-import {FRUITS_ACID, FRUITS_MELONS, FRUITS_OLEAGINOUS_DRY, FRUITS_SEMIACID, FRUITS_SWEET} from '../models/classificationFruits'
+import {FRUITS_ACID, FRUITS_MELONS, FRUITS_OLEAGINOUS_DRY, FRUITS_SEMIACID, FRUITS_SWEET} from '../models/classificationFruits';
+import { environment } from '../../environments/environment';
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,7 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class FruitService {
   private http = inject(HttpClient);
-  private baseUrl : string = '/api/fruit/all';
+  private baseUrl : string = `${environment.apiUrl}/all`;
   private listsFruit = [FRUITS_SWEET, FRUITS_ACID, FRUITS_SEMIACID, FRUITS_MELONS, FRUITS_OLEAGINOUS_DRY]
 
 
@@ -30,7 +31,6 @@ export class FruitService {
    return this.http.get(this.baseUrl, ).subscribe({
       next: (response: any) =>{
         this.fruits$.next(response);
-        console.log(this.getAllFruits())
       },
        error: (err: any) => console.error('Errore nella chiamata', err)
     })
@@ -39,7 +39,7 @@ export class FruitService {
 
   // metodo per prendere il nome dei frutti
     getYourFruit(name: string){
-      this.http.get(`/api/fruit/${name}`).subscribe({
+      this.http.get(`${environment.apiUrl}/${name}`).subscribe({
         next: (response: any) =>{
           this.filteredFruit.next(response);
         },
