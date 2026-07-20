@@ -33,7 +33,7 @@ export class HomePage implements OnInit {
     if(isPlatformServer(this.platformId)){
       return;
     }
-    this.fruitService.getAllFruits();
+     this.fruitService.getAllFruits();
 
     // subscribe per prendere tutti i dati dei frutti
     this.fruitService.fruits$.subscribe((data) =>{

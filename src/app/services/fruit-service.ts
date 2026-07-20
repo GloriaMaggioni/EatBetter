@@ -3,17 +3,20 @@ import { inject, Injectable } from '@angular/core';
 import { FruitsModel } from '../models/fruits-model';
 import {FRUITS_ACID, FRUITS_MELONS, FRUITS_OLEAGINOUS_DRY, FRUITS_SEMIACID, FRUITS_SWEET} from '../models/classificationFruits';
 import { environment } from '../../environments/environment';
-
 import { BehaviorSubject } from 'rxjs';
+
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class FruitService {
   private http = inject(HttpClient);
-  private baseUrl : string = `${environment.apiUrl}/all`;
-  private listsFruit = [FRUITS_SWEET, FRUITS_ACID, FRUITS_SEMIACID, FRUITS_MELONS, FRUITS_OLEAGINOUS_DRY]
+  private baseUrl : string =  environment.apiUrl;
+  private proxyUrl : string = environment.corsProxy
+  private listsFruit = [FRUITS_SWEET, FRUITS_ACID, FRUITS_SEMIACID, FRUITS_MELONS, FRUITS_OLEAGINOUS_DRY];
 
+ 
 
   
   fruits$ = new BehaviorSubject<FruitsModel[]> ([]);
@@ -27,19 +30,19 @@ export class FruitService {
 
   // chiamata per prendere tutti i frutti
 
-  getAllFruits(){
-   return this.http.get(this.baseUrl, ).subscribe({
-      next: (response: any) =>{
+   getAllFruits(){
+    return this.http.get(`${this.proxyUrl}${this.baseUrl}/all` ).subscribe({
+       next: (response: any) =>{
         this.fruits$.next(response);
-      },
+       },
        error: (err: any) => console.error('Errore nella chiamata', err)
     })
-  }
+   }
 
 
   // metodo per prendere il nome dei frutti
     getYourFruit(name: string){
-      this.http.get(`${environment.apiUrl}/${name}`).subscribe({
+      this.http.get(`${this.proxyUrl}${this.baseUrl}/${name}`).subscribe({
         next: (response: any) =>{
           this.filteredFruit.next(response);
         },
@@ -64,7 +67,7 @@ export class FruitService {
     } else if(category === 'Oleaginous/Dry'){
       categoryList = this.listsFruit[4];
     }else if(category === 'All'){     
-      this.getAllFruits();
+      // this.getAllFruits();
       this.filteredFruitByCategory.next(null)
    } else {
        alert('Frutto non trovato')

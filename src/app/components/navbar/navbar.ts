@@ -18,7 +18,7 @@ export class Navbar {
 
   //method to take the searchBar text
   searchFruit(){
-   this.service.getAllFruits()
+    this.service.getAllFruits()
   }
 
 
@@ -27,7 +27,7 @@ export class Navbar {
       this.service.getYourFruit(this.testoDigitato)
       
     }else{
-      this.service.getAllFruits();
+      // this.service.getAllFruits();
       this.service.filteredFruit.next(null)
     }
   }
