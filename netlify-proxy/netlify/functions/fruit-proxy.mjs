@@ -22,8 +22,8 @@ export default async (req) => {
         },
     });
 
+}
 
-    export const config = {
+   export const config = {
         path: "/api/fruit-proxy"
     }
-}
