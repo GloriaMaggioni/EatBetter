@@ -13,7 +13,6 @@ import { BehaviorSubject } from 'rxjs';
 export class FruitService {
   private http = inject(HttpClient);
   private baseUrl : string =  environment.apiUrl;
-  private proxyUrl : string = environment.corsProxy
   private listsFruit = [FRUITS_SWEET, FRUITS_ACID, FRUITS_SEMIACID, FRUITS_MELONS, FRUITS_OLEAGINOUS_DRY];
 
  
@@ -30,10 +29,11 @@ export class FruitService {
 
   // chiamata per prendere tutti i frutti
 
-   getAllFruits(){
-    return this.http.get(`${this.proxyUrl}${this.baseUrl}/all` ).subscribe({
+   getAllFruits(){ 
+    return this.http.get(`${this.baseUrl}/all` ).subscribe({
        next: (response: any) =>{
         this.fruits$.next(response);
+         console.log('risposta ricevuta:', response);
        },
        error: (err: any) => console.error('Errore nella chiamata', err)
     })
@@ -42,7 +42,7 @@ export class FruitService {
 
   // metodo per prendere il nome dei frutti
     getYourFruit(name: string){
-      this.http.get(`${this.proxyUrl}${this.baseUrl}/${name}`).subscribe({
+      this.http.get(`${this.baseUrl}/${name}`).subscribe({
         next: (response: any) =>{
           this.filteredFruit.next(response);
         },
