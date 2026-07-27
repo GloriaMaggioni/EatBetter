@@ -5,6 +5,11 @@ An Angular web application for searching and browsing nutritional information ab
 ## 📋 Description
  
 EatBetter lets users search for fruits and view their nutritional information (family, genus, calories, sugar content, etc.), with the ability to filter results by botanical category. The project was built as a hands-on exercise as part of a Full Stack Development study path, focusing on reactive state management, HTTP requests, component architecture, and testing.
+
+[Hero Section]<img width="3170" height="1664" alt="EatBetter 1" src="https://github.com/user-attachments/assets/e78f57b6-dcc6-4013-873d-eb32ceab1d4f" />
+
+[Home Page]<img width="3124" height="1646" alt="EatBetter 2" src="https://github.com/user-attachments/assets/98e52ba3-358c-4f8f-8653-1ea2ae1385f9" />
+
  
 ## ✨ Features
  
